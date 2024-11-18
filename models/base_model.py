@@ -2,23 +2,24 @@
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """
-    A base class for other models.
-    Handles initialization, serialization, and deserialization of instances.
+    A base class for all models, handling initialization, serialization, and deserialization.
     """
     def __init__(self, *args, **kwargs):
         """
         Initializes a new instance of BaseModel.
-        - If `kwargs` is not empty, it uses the dictionary to set attributes.
-        - Otherwise, it initializes default attributes.
+        - If kwargs is provided, attributes are set from the dictionary.
+        - Otherwise, id and datetime attributes are initialized.
         """
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    # Convert string datetime to datetime object
+                    # Convert ISO format string back to datetime object
                     setattr(self, key, datetime.fromisoformat(value))
-                else:
+                elif key != "__class__":
+                    # Skip setting __class__
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -41,8 +42,8 @@ class BaseModel:
     def to_dict(self):
         """
         Returns a dictionary representation of the instance:
-        - Adds a `__class__` key with the class name.
-        - Converts `created_at` and `updated_at` to ISO format strings.
+        - Includes `__class__` with the class name.
+        - Converts datetime attributes to ISO format strings.
         """
         result = self.__dict__.copy()
         result["__class__"] = self.__class__.__name__
