@@ -1,20 +1,15 @@
-/* Header styling */
-header {
-    background-color: #FF0000; /* Header background color */
-    color: white;
-    height: 70px;
-    width: 100%;
-    border-bottom: 1px solid #CCCCCC;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
+header{
+	color: white;
+	height: 70px;
+	width: 100%;
+	border-bottom: 1px solid #CCCCCC;
+	display: flex;
+	align-items: center;
 }
 
-/* Logo placeholder */
-header .logo {
-    background-color: white; /* Example logo background for visibility */
-    height: 40px;
-    width: 40px;
-    border-radius: 50%; /* Makes the logo circular */
+.logo{
+	height: 60px;
+	width: 140px;
+	background: url("../images/logo.png") no-repeat center;
+	padding-left: 20px
 }
-
